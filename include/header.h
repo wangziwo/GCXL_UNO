@@ -12,5 +12,5 @@
 
 
 
-void read_rgb();
+int read_rgb();
 #endif //GCXL_UNO_HEADER_H

@@ -1,5 +1,5 @@
 //
-// Created by wang on 2021/3/13.
+// Created by wong on 2021/3/13.
 //
 
 #include "header.h"
@@ -74,20 +74,20 @@ void TSC_Callback()
             break;
         case 1:
             g_array[1] = ((g_count+R)*0.9);    //存储1s内的红光通过滤波器时，TCS3200输出的脉冲个数
-            Serial.print("R=");
-            Serial.print((g_count+R)*0.9);
+//            Serial.print("R=");
+//            Serial.print((g_count+R)*0.9);
             TSC_WB(HIGH, HIGH);  //选择让绿色光线通过滤波器的模式
             break;
         case 2:
             g_array[2] = ((g_count+G)*1.3);    //存储1s内的绿光通过滤波器时，TCS3200输出的脉冲个数
-            Serial.print("  G=");
-            Serial.print((g_count+G)*1.3);
+//            Serial.print("  G=");
+//            Serial.print((g_count+G)*1.3);
             TSC_WB(LOW, HIGH);  //选择让蓝色光线通过滤波器的模式
             break;
         case 3:
             g_array[3] = ((g_count+B)*1.2);     //存储1s内的蓝光通过滤波器时，TCS3200输出的脉冲个数
-            Serial.print("B=");
-            Serial.print((g_count+B)*1.2);
+//            Serial.print("B=");
+//            Serial.print((g_count+B)*1.2);
             TSC_WB(HIGH, LOW);   //选择无滤波器的模式
             break;
         default:
@@ -95,9 +95,9 @@ void TSC_Callback()
             break;
     }
 }
-void read_rgb(){
+int read_rgb(){
     TSC_Init();
-    Serial.begin(9600,SERIAL_8N1);  //启动串行通信
+//    Serial.begin(9600,SERIAL_8N1);  //启动串行通信
     Timer1.initialize();
     Timer1.attachInterrupt(TSC_Callback); //设置定时器1的中断，中断调用函数为TSC_Callback()
     //设置TCS3200输出信号的上跳沿触发中断，中断调用函数为TSC_Count()
@@ -109,8 +109,9 @@ void read_rgb(){
         if(g_array[1]>g_array[2]&&g_array[1]>g_array[3]){m=1;digitalWrite(5,HIGH);digitalWrite(6,LOW);digitalWrite(7,LOW);delay(100);}
         if(g_array[2]>g_array[3]&&g_array[2]>g_array[1]){m=2;digitalWrite(6,HIGH);digitalWrite(5,LOW);digitalWrite(7,LOW);delay(100);}
         if(g_array[3]>g_array[1]&&g_array[3]>g_array[2]){m=3;digitalWrite(7,HIGH);digitalWrite(5,LOW);digitalWrite(6,LOW);delay(100);}
-        Serial.print("   color is");
-        Serial.println(m);}
+//        Serial.print("   color is");
+//        Serial.println(m);
+        }
     Timer1.stop();
-
+    return m;
 }
