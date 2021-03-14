@@ -12,5 +12,8 @@
 
 
 
-int read_rgb();
+char read_rgb();
+
+void claw(int stage,int action);
+void get_order_info();
 #endif //GCXL_UNO_HEADER_H

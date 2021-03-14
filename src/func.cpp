@@ -30,7 +30,7 @@ int a=1,b=1;
 float g_SF[4];
 int   g_count = 0;
 int   g_array[4];
-int   m;
+char   m;
 int   g_flag = 0;
 
 
@@ -95,7 +95,7 @@ void TSC_Callback()
             break;
     }
 }
-int read_rgb(){
+char read_rgb(){
     TSC_Init();
 //    Serial.begin(9600,SERIAL_8N1);  //启动串行通信
     Timer1.initialize();
@@ -106,12 +106,12 @@ int read_rgb(){
     for(b=0;b<=2;b++)
     {g_flag = 0;
         delay(400);
-        if(g_array[1]>g_array[2]&&g_array[1]>g_array[3]){m=1;digitalWrite(5,HIGH);digitalWrite(6,LOW);digitalWrite(7,LOW);delay(100);}
-        if(g_array[2]>g_array[3]&&g_array[2]>g_array[1]){m=2;digitalWrite(6,HIGH);digitalWrite(5,LOW);digitalWrite(7,LOW);delay(100);}
-        if(g_array[3]>g_array[1]&&g_array[3]>g_array[2]){m=3;digitalWrite(7,HIGH);digitalWrite(5,LOW);digitalWrite(6,LOW);delay(100);}
+        if(g_array[1]>g_array[2]&&g_array[1]>g_array[3]){m='1';digitalWrite(5,HIGH);digitalWrite(6,LOW);digitalWrite(7,LOW);delay(100);}
+        if(g_array[2]>g_array[3]&&g_array[2]>g_array[1]){m='2';digitalWrite(6,HIGH);digitalWrite(5,LOW);digitalWrite(7,LOW);delay(100);}
+        if(g_array[3]>g_array[1]&&g_array[3]>g_array[2]){m='3';digitalWrite(7,HIGH);digitalWrite(5,LOW);digitalWrite(6,LOW);delay(100);}
 //        Serial.print("   color is");
 //        Serial.println(m);
         }
     Timer1.stop();
-    return m;
+    return m ;
 }
